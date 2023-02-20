@@ -24,5 +24,7 @@ namespace TUAApi.Infrastructure.Configurations
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
+
+
     }
 }

@@ -18,7 +18,7 @@ namespace TUAApi.Repository.Product
 
         public async Task<List<DBContext.Product>> GetProducts()
         {
-            var products = await _dBContext.Products.Where(p => p.Deleted == false ).ToListAsync();
+            var products = await _dBContext.Products.Include(p=>p.ProductImages.Where(i=>i.Deleted==false)).Where(p => p.Deleted == false ).ToListAsync();
             return products;
         }
 
