@@ -99,6 +99,7 @@ public partial class TuaDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(300);
             entity.Property(e => e.PhoneNumber).HasMaxLength(300);
             entity.Property(e => e.State).HasMaxLength(300);
+            entity.Property(e => e.UserName).HasMaxLength(300);
             entity.Property(e => e.ZipCode).HasMaxLength(300);
 
             entity.HasOne(d => d.Type).WithMany(p => p.Users)

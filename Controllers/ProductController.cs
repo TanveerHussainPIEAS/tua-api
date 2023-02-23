@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TUAApi.DTO;
@@ -19,6 +20,7 @@ namespace TUAApi.Controllers
         }
 
         [HttpGet]
+        //[HttpGet, Authorize]
         public async Task<IActionResult> Get()
         {
             try

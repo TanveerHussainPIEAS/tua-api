@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System.Diagnostics.Contracts;
 using TUAApi.DBContext;
+using TUAApi.DTO;
 using TUAApi.DTO.Product;
 
 namespace TUAApi.Infrastructure.AutoMapper
@@ -14,6 +15,10 @@ namespace TUAApi.Infrastructure.AutoMapper
             CreateMap<ProductTypeDto, ProductType>().ReverseMap();
 
             CreateMap<ProductImageDto, ProductImage>().ReverseMap();
+
+            CreateMap<AuthenticatedUserDto, User>().ReverseMap();
+            CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<UserTypeDto, UserType>().ReverseMap();
             
 
             //CreateMap<DealDocument, DealDocumentDto>().ForMember(d => d.DocumentType, opt => opt.MapFrom(src => src.DocumentType));
