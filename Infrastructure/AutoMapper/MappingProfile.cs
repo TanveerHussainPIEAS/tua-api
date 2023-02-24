@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using TUAApi.DBContext;
 using TUAApi.DTO;
 using TUAApi.DTO.Product;
+using TUAApi.DTO.User;
 
 namespace TUAApi.Infrastructure.AutoMapper
 {
@@ -19,6 +20,7 @@ namespace TUAApi.Infrastructure.AutoMapper
             CreateMap<AuthenticatedUserDto, User>().ReverseMap();
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<UserTypeDto, UserType>().ReverseMap();
+            CreateMap<UserPermissionDto, UserPermission>().ReverseMap();
             
 
             //CreateMap<DealDocument, DealDocumentDto>().ForMember(d => d.DocumentType, opt => opt.MapFrom(src => src.DocumentType));

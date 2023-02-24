@@ -25,6 +25,8 @@ public partial class TuaDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UserPermission> UserPermissions { get; set; }
+
     public virtual DbSet<UserType> UserTypes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -102,10 +104,35 @@ public partial class TuaDbContext : DbContext
             entity.Property(e => e.UserName).HasMaxLength(300);
             entity.Property(e => e.ZipCode).HasMaxLength(300);
 
+            entity.HasOne(d => d.Permission).WithMany(p => p.Users)
+                .HasForeignKey(d => d.PermissionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_User_Permission");
+
             entity.HasOne(d => d.Type).WithMany(p => p.Users)
                 .HasForeignKey(d => d.TypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_User_UserType");
+        });
+
+        modelBuilder.Entity<UserPermission>(entity =>
+        {
+            entity.ToTable("UserPermission");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.ModifiedDate).HasDefaultValueSql("(getutcdate())");
+
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.UserPermissionCreatedByNavigations)
+                .HasForeignKey(d => d.CreatedBy)
+                .HasConstraintName("FK_Activity_CreatedBy_User");
+
+            entity.HasOne(d => d.DeletedByNavigation).WithMany(p => p.UserPermissionDeletedByNavigations)
+                .HasForeignKey(d => d.DeletedBy)
+                .HasConstraintName("FK_Activity_DeletedBy_User");
+
+            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.UserPermissionModifiedByNavigations)
+                .HasForeignKey(d => d.ModifiedBy)
+                .HasConstraintName("FK_Activity_ModifiedBy_User");
         });
 
         modelBuilder.Entity<UserType>(entity =>

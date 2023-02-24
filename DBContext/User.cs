@@ -9,6 +9,8 @@ public partial class User
 
     public int TypeId { get; set; }
 
+    public int PermissionId { get; set; }
+
     public string Name { get; set; } = null!;
 
     public string Email { get; set; } = null!;
@@ -43,5 +45,13 @@ public partial class User
 
     public int? ModifiedBy { get; set; }
 
+    public virtual UserPermission Permission { get; set; } = null!;
+
     public virtual UserType Type { get; set; } = null!;
+
+    public virtual ICollection<UserPermission> UserPermissionCreatedByNavigations { get; } = new List<UserPermission>();
+
+    public virtual ICollection<UserPermission> UserPermissionDeletedByNavigations { get; } = new List<UserPermission>();
+
+    public virtual ICollection<UserPermission> UserPermissionModifiedByNavigations { get; } = new List<UserPermission>();
 }
